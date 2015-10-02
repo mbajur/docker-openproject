@@ -1,10 +1,12 @@
 FROM       abevoelker/ruby
 MAINTAINER Abe Voelker <abe@abevoelker.com>
 
+ENV branch stable
+
 # Set up application user 'openproject' and check out source
 RUN adduser openproject --home /home/openproject --shell /bin/bash --disabled-password --gecos "" &&\
   mkdir -p /var/www/openproject &&\
-  git clone https://github.com/opf/openproject.git -b stable --single-branch /var/www/openproject &&\
+  git clone https://github.com/opf/openproject.git -b ${branch} --single-branch /var/www/openproject &&\
   mkdir -p /var/www/openproject/docker/scripts
 
 COPY Gemfile.local /var/www/openproject/
